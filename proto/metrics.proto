@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package libproto;
+
+message Metric {
+  string name = 1;
+  double value = 2;
+  int64 timestamp = 3;
+}
+
+message MetricBatch {
+  repeated Metric metrics = 1;
+}
+
+service CollectorService {
+  rpc SendMetrics(MetricBatch) returns (Ack);
+}
+
+message Ack {
+  bool success = 1;
+}

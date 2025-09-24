@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package libproto;
+
+message LogEntry {
+  string message = 1;
+  string level = 2;
+  int64 timestamp = 3;
+}
+
+message LogBatch {
+  repeated LogEntry logs = 1;
+}
+
+service CollectorService {
+  rpc SendLogs(LogBatch) returns (Ack);
+}
